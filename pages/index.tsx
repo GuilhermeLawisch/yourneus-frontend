@@ -13,6 +13,8 @@ export default function Home() {
   const { user } = useContext(AuthContext)
   const { theme } = useContext(ToggleContext)
 
+  console.log(user)
+
   const highlighted1 = [0, '']
   const highlighted2 = [0, '']
   const highlighted3 = [0, '']
@@ -57,7 +59,7 @@ export default function Home() {
     }
   ])
 
-  values.map((value:any) => {
+  values.forEach((value:any) => {
     if (value.likes > highlighted1[0]) { 
 
       highlighted3[0] = highlighted2[0]
@@ -91,6 +93,12 @@ export default function Home() {
       <Head>
         <title>YourneuS</title>
       </Head>
+
+      { user ? (
+        <p>{ user?.name }</p>
+      ) : (
+        <></>
+      )}
 
       <Background>
         <Header />

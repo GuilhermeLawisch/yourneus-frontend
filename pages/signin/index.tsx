@@ -13,7 +13,7 @@ type IData = {
 export default function SignIn() {
   const { register, handleSubmit } = useForm()
 
-  const { signIn } = useContext(AuthContext)
+  const { user, signIn } = useContext(AuthContext)
 
   const handleSignIn = async (data: IData) => {
     await signIn(data)
@@ -24,6 +24,12 @@ export default function SignIn() {
       <Head>
         <title>YourneuS | Sign In</title>
       </Head>
+
+      { user ? (
+        <p>{ user?.name }</p>
+      ) : (
+        <></>
+      )}
 
       <Container>
         <h2>Sign in to your account</h2>

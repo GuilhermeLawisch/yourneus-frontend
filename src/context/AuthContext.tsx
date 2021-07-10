@@ -20,6 +20,7 @@ type IAuthContext = {
   isAuthenticated: boolean;
   signIn: (data: ISignIn) => Promise<void>
 }
+
 export const AuthContext = createContext({} as IAuthContext)
 
 const AuthContextProvider = ({ children }) => {
@@ -31,12 +32,12 @@ const AuthContextProvider = ({ children }) => {
     const { 'yourneustoken': token } = parseCookies()
 
     if (token) {
-      api.post("/CHANGETHIS", { token }).then(response => setUser(response.data.user))
+      api.post("/userdata", { token }).then(response => setUser(response.data.user))
     }
   }, [])
 
   const signIn = async ({ email, password }: ISignIn) => {
-    const response = await api.post("/CHANGETHIS", { email, password })
+    const response = await api.post("/auth", { email, password })
 
     setCookie(undefined, 'yourneustoken', response.data.token, {
       maxAge: 60 * 60 * 1   // 1 hour
