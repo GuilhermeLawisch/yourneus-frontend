@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
-export const Container = styled.main`
+export const Container = styled.section`
   .dark {
     background: var(--background-dark);
+    height: 100vh;
   }
 
   max-width: 1080px;
@@ -73,5 +74,6 @@ export const Container = styled.main`
       background-color: var(--purple-pink);
     }
   }
+  
   
 `;

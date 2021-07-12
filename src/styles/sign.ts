@@ -64,5 +64,4 @@ export const Container = styled.section`
       background: rgba(0, 0, 0, 0.05);
     }
   }
-
 `;

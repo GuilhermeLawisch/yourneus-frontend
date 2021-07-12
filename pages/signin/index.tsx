@@ -1,8 +1,8 @@
 import Head from "next/head"
 import { useContext } from "react"
-import { Container } from "../../src/styles/sign"
 import { useForm } from 'react-hook-form'
 
+import { Container } from "../../src/styles/sign"
 import { AuthContext } from "../../src/context/AuthContext"
 
 type IData = {
@@ -24,12 +24,6 @@ export default function SignIn() {
       <Head>
         <title>YourneuS | Sign In</title>
       </Head>
-
-      { user ? (
-        <p>{ user?.name }</p>
-      ) : (
-        <></>
-      )}
 
       <Container>
         <h2>Sign in to your account</h2>

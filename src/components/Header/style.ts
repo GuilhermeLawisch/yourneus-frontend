@@ -32,4 +32,5 @@ export const Container = styled.header`
       font-size: 1.2rem;
     }
   }
+  
 `
