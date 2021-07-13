@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Container = styled.section`
   .dark {
     background: var(--background-dark);
-    height: 100vh;
   }
 
   max-width: 1080px;
@@ -41,6 +40,8 @@ export const Container = styled.section`
       background-color: var(--purple);
 
       font-family: 'Roboto';
+
+      cursor: pointer;
     }
   }
 
@@ -58,6 +59,7 @@ export const Container = styled.section`
       position: relative;
       
       font-family: 'Roboto';
+      cursor: pointer;
     }
     
     .card::before {

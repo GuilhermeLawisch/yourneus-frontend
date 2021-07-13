@@ -31,16 +31,19 @@ type IDataCreate = {
 
 type INewsContext = {
   allNews: Array<Object>;
+  news: INews;
+  getAllNews: () => Promise<void>
   createNews: (data: IDataCreate) => Promise<void>
-  getNews: () => Promise<void>
+  getNews: (id: string | string[]) => Promise<void>
 }
 
 export const NewsContext = createContext({} as INewsContext)
 
 const NewsContextProvider = ({ children }) => {
   const [allNews, setAllNews] = useState([]) 
+  const [news, setNews] = useState<INews>({} as INews)
 
-  const getNews = async () => {
+  const getAllNews = async () => {
     const response = await api.get('/news')
 
     setAllNews(response.data)
@@ -52,12 +55,22 @@ const NewsContextProvider = ({ children }) => {
     Router.push('/')
   }
 
+  const getNews = async (id: string | string[]) => {
+    const response = await api.get(`/news/${id}`)
+
+    setNews(response.data)
+
+    Router.push(`/news/${id}`)
+  }
+
   return (
     <>
       <NewsContext.Provider value={{
         allNews,
-        getNews,
+        news,
+        getAllNews,
         createNews,
+        getNews
       }}>
         { children }
       </NewsContext.Provider>

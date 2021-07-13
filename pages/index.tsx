@@ -10,30 +10,26 @@ import { ToggleContext } from "../src/context/ToggleContext"
 import { AuthContext } from "../src/context/AuthContext"
 import { NewsContext } from "../src/context/NewsContext"
 
+type INews = {
+  id: string;
+  title: string;
+  category: string;
+  content: string;
+  idCreator: string;
+  likes: number;
+  createdAt: Date;
+  updatedAt?: Date;
+}
+
 export default function Home() {
   const { theme } = useContext(ToggleContext)
   const { user } = useContext(AuthContext)
-  const { allNews, getNews } = useContext(NewsContext)
+  const { getNews } = useContext(NewsContext)
+  const { allNews, getAllNews } = useContext(NewsContext)
 
   const highlighted1 = [-1, '']
   const highlighted2 = [-1, '']
   const highlighted3 = [-1, '']
-
-  // const [values, setValues] = useState([
-  //   {
-  //     id: '12',
-  //     title: 'Nova Vacina 12',
-  //     description: 'Mais uma',
-  //     date: '2021/07/02',
-  //     likes: 11
-  //   }, {
-  //     id: '34',
-  //     title: 'Nova Vacina2 34',
-  //     description: 'Mais uma',
-  //     date: '2021/07/03',
-  //     likes: 11
-  //   }
-  // ])
 
   allNews.forEach((value:any) => {
     if (value.likes > highlighted1[0]) { 
@@ -62,10 +58,10 @@ export default function Home() {
     }
   })
 
-  const highlightedNews = allNews.filter(value => value.id === highlighted1[1] || value.id === highlighted2[1] || value.id === highlighted3[1])
+  const highlightedNews = allNews.filter((value: INews) => value.id === highlighted1[1] || value.id === highlighted2[1] || value.id === highlighted3[1])
 
   useEffect(() => {
-    getNews()
+    getAllNews()
   }, [])
 
   return (
@@ -81,7 +77,7 @@ export default function Home() {
             {highlightedNews?.map((value:any, index:any) => {
               return (
                 <>
-                  <a href={`/news/${value.id}`} key={index} className={cx(
+                  <a onClick={() => getNews(value.id)} key={index} className={cx(
                     'card',
                     value.id === highlighted1[1] ? `highlighted1` : '',
                     value.id === highlighted2[1] ? `highlighted2` : '',
@@ -99,7 +95,7 @@ export default function Home() {
             {allNews.map((value:any, index:any) => {
               return (
                 <>
-                  <a  href={`/news/${value.id}`} key={index} className={cx(
+                  <a onClick={() => getNews(value.id)} key={index} className={cx(
                     'card',
                     theme ? 'dark' : 'white'
                   )}>
