@@ -21,7 +21,10 @@ export default function News() {
         <Header />
         <Container>
           <div>
-            <p>{ news?.title }</p>
+            <h2>{ news?.title }</h2>
+            <p>{ news?.category }</p>
+            <p>{ news?.content }</p>
+            <p>{ news?.createdAt }</p>
           </div>
         </Container>
       </Background>

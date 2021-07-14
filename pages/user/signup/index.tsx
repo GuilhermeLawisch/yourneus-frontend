@@ -3,13 +3,13 @@ import { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import cx from 'classnames'
 
-import { Background } from "../../src/components/Background"
-import { Header } from "../../src/components/Header"
+import { Background } from "../../../src/components/Background"
+import { Header } from "../../../src/components/Header"
 
-import { ToggleContext } from "../../src/context/ToggleContext"
-import { AuthContext } from "../../src/context/AuthContext"
+import { ToggleContext } from "../../../src/context/ToggleContext"
+import { AuthContext } from "../../../src/context/AuthContext"
 
-import { Container } from "../../src/styles/sign"
+import { Container } from "../../../src/styles/sign"
 
 type IData = {
   name: string;

@@ -3,11 +3,11 @@ import { useContext } from "react"
 import { useForm } from 'react-hook-form'
 import cx from "classnames"
 
-import { Header } from "../../src/components/Header"
-import { Background } from '../../src/components/Background'
-import { Container } from "../../src/styles/sign"
-import { AuthContext } from "../../src/context/AuthContext"
-import { ToggleContext } from "../../src/context/ToggleContext"
+import { Header } from "../../../src/components/Header"
+import { Background } from '../../../src/components/Background'
+import { Container } from "../../../src/styles/sign"
+import { AuthContext } from "../../../src/context/AuthContext"
+import { ToggleContext } from "../../../src/context/ToggleContext"
 import Router from "next/router"
 
 type IData = {
@@ -52,7 +52,7 @@ export default function SignIn() {
                 <div className="buttons">
                   <button type="submit">Sign In</button>
                   <p>or</p>
-                  <button type="button" onClick={() => Router.push('/signup')} >Create Account</button>
+                  <button type="button" onClick={() => Router.push('/user/signup')} >Create Account</button>
                 </div>
               </form>
             </div>

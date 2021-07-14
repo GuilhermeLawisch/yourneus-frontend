@@ -2,8 +2,12 @@ import { Container } from './style'
 import cx from 'classnames'
 import Router from 'next/router'
 import { Toggle } from '../Toggle'
+import { AuthContext } from '../../context/AuthContext'
+import { useContext } from 'react'
 
 const Header = () => {
+  const { isAuthenticated, user } = useContext(AuthContext)
+
   return (
     <>
       <Container>
@@ -17,7 +21,11 @@ const Header = () => {
             <nav>
               <ul>
                 <li><a onClick={() => Router.push("/news/register")}>New News</a></li>
-                <li><a onClick={() => Router.push("/signin")}>Sign In</a></li>
+                { isAuthenticated ? (
+                  <li><a onClick={() => Router.push("/user")}>{ user?.username }</a></li>
+                ) : (
+                  <li><a onClick={() => Router.push("/user/signin")}>Sign In</a></li>
+                )}
                 <Toggle />
               </ul>
             </nav>
