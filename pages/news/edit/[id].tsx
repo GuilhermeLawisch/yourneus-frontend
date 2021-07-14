@@ -1,18 +1,27 @@
-import { useRouter } from "next/dist/client/router"
+import { useContext } from "react"
 import Head from "next/head"
 import cx from 'classnames'
-import { Container } from "../../../src/styles/create-edit"
+import { useForm } from "react-hook-form"
 
+import { Container } from "../../../src/styles/create-edit"
 import { Background } from '../../../src/components/Background'
 import { Header } from '../../../src/components/Header'
 import { ToggleContext } from '../../../src/context/ToggleContext'
-import { useContext } from "react"
+import { NewsContext } from "../../../src/context/NewsContext"
 
 export default function NewsAdmin() {
-  const router = useRouter()
-  const { id } = router.query
+  const { register, handleSubmit } = useForm()
 
   const { theme } = useContext(ToggleContext)
+  const { newsEdit, updateNews } = useContext(NewsContext)
+
+  const handleUpdate = (data: any) => {
+    if (data.category == '0') {
+      alert('error')
+    } else {
+      updateNews(data)
+    }
+  }
 
   return (
     <>
@@ -28,17 +37,18 @@ export default function NewsAdmin() {
               theme ? 'dark' : ''
             )}>
               <h2>Update your news</h2>
-              <form>
-                <input type="text" name="" id="" placeholder="Title" />
-                <select name="" id="">
-                  <option value="">Select Category</option>
-                  <option value="">Information</option>
-                  <option value="">Sport</option>
-                  <option value="">Famous</option>
+              <form onSubmit={handleSubmit(handleUpdate)}>
+                <input {...register('title')} type="text" name="title" id="title" placeholder="Title" defaultValue={ newsEdit?.title } />
+                <select {...register('category')} name="category" id="category">
+                  <option value="0">Select Category</option>
+                  <option value="Information">Information</option>
+                  <option value="Sport">Sport</option>
+                  <option value="Famous">Famous</option>
+                  <option value="Culture">Culture</option>
                 </select>
-                <textarea name="" id="" placeholder="Description" />
+                <textarea {...register('content')} name="content" id="content" placeholder="Content"  defaultValue={ newsEdit?.content } />
+                <button type="submit">Update news</button>
               </form>
-              <button type="button">Update news</button>
             </div>
           </div>
          

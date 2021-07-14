@@ -105,6 +105,7 @@ export default function Home() {
                     <p>{ value.content }</p>
                     <p>{ value.idCreator }</p>
                     <p>{ value.createdAt }</p>
+                    <p>{ value.updatedAt }</p>
                   </a>
                 </>
               )
