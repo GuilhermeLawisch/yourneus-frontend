@@ -10,7 +10,11 @@ export const Container = styled.main`
     h1,
     h2,
     h3,
-    p {
+    p,
+    button,
+    label,
+    input,
+    input::placeholder {
       color: var(--text-dark-theme) !important;
     }
   }

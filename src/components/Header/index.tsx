@@ -1,5 +1,6 @@
 import { Container } from './style'
 import cx from 'classnames'
+import Router from 'next/router'
 import { Toggle } from '../Toggle'
 
 const Header = () => {
@@ -8,15 +9,15 @@ const Header = () => {
       <Container>
         <div>
           <div>
-            <h1>YourNeus</h1>
+            <h1><a onClick={() => Router.push("/")}>YourNeus</a></h1>
           </div>
           <div className={cx(
             'section'
           )}>
             <nav>
               <ul>
-                <li><a href="/news/register">NewNews</a></li>
-                <li><a href="/signin">Sign In</a></li>
+                <li><a onClick={() => Router.push("/news/register")}>New News</a></li>
+                <li><a onClick={() => Router.push("/signin")}>Sign In</a></li>
                 <Toggle />
               </ul>
             </nav>

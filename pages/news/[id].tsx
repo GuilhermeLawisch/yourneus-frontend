@@ -2,6 +2,7 @@ import { useRouter } from "next/dist/client/router"
 import Head from "next/head"
 import { useContext, useEffect } from "react"
 
+import { Background } from "../../src/components/Background"
 import { Header } from "../../src/components/Header"
 import { Container } from "../../src/styles/view"
 
@@ -16,12 +17,14 @@ export default function News() {
         <title>YourneuS | View News</title>
       </Head>
 
-      <Header />
-      <Container>
-        <div>
-          <p>{ news?.title }</p>
-        </div>
-      </Container>
+      <Background>
+        <Header />
+        <Container>
+          <div>
+            <p>{ news?.title }</p>
+          </div>
+        </Container>
+      </Background>
     </>
   )
 }
