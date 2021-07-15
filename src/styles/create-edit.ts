@@ -41,12 +41,24 @@ export const Container = styled.section`
           min-height: 20vh;
           max-height: 75vh;
 
+          font-family: 'Roboto';
+
           padding: 0.5rem;
           font-size: 1.2rem;
         }
 
         textarea::placeholder {
           font-family: 'Roboto';
+        }
+
+        >div {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          button {
+            width: 49%;
+          }
         }
       }
 
@@ -77,6 +89,10 @@ export const Container = styled.section`
       border: 1px hsl(0, 0%, 75%) solid;
       box-shadow: 0;
       color: #fff;
+    }
+
+    button:hover {
+      background: rgba(0, 0, 0, 0.1);
     }
   }
 `;

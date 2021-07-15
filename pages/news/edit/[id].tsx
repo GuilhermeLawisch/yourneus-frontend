@@ -13,7 +13,7 @@ export default function NewsAdmin() {
   const { register, handleSubmit } = useForm()
 
   const { theme } = useContext(ToggleContext)
-  const { newsEdit, updateNews } = useContext(NewsContext)
+  const { newsEdit, updateNews, deleteNews } = useContext(NewsContext)
 
   const handleUpdate = (data: any) => {
     if (data.category == '0') {
@@ -47,7 +47,10 @@ export default function NewsAdmin() {
                   <option value="Culture">Culture</option>
                 </select>
                 <textarea {...register('content')} name="content" id="content" placeholder="Content"  defaultValue={ newsEdit?.content } />
-                <button type="submit">Update news</button>
+                <div>
+                  <button type="submit">Update</button>
+                  <button onClick={() => deleteNews(newsEdit?.id)}>Delete</button>
+                </div>
               </form>
             </div>
           </div>

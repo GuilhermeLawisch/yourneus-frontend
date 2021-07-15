@@ -13,14 +13,14 @@ const Header = () => {
       <Container>
         <div>
           <div>
-            <h1><a onClick={() => Router.push("/")}>YourNeus</a></h1>
+            <h1><a onClick={() => Router.push("/")}>YourneuS</a></h1>
           </div>
           <div className={cx(
             'section'
           )}>
             <nav>
               <ul>
-                <li><a onClick={() => Router.push("/news/register")}>New News</a></li>
+                <li><a onClick={() => Router.push("/news/create")}>New News</a></li>
                 { isAuthenticated ? (
                   <li><a onClick={() => Router.push("/user")}>{ user?.username }</a></li>
                 ) : (

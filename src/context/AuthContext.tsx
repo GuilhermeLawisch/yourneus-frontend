@@ -22,6 +22,8 @@ type IUser = {
   password?: string;
   passwordHash?: string;
   avatar_url?: string;
+  subscribedAt?: Date;
+  updatedAt?: Date;
 }
 
 type IAuthContext = {
@@ -29,6 +31,7 @@ type IAuthContext = {
   isAuthenticated: boolean;
   signUp: (data: ISignUp) => Promise<void>
   signIn: (data: ISignIn) => Promise<void>
+  update: (data: IUser) => Promise<void>
 }
 
 export const AuthContext = createContext({} as IAuthContext)
@@ -66,13 +69,24 @@ const AuthContextProvider = ({ children }) => {
     Router.push('/')
   }
 
+  const update = async ({ username, email, password, avatar_url }: IUser) => {
+    const id = user.id
+
+    const response = await api.put(`/user/update/${id}`, { username, email, password, avatar_url })
+
+    if (response.data.message == 'success') {
+      signIn({ email, password })
+    }
+  }
+
   return (
     <>
       <AuthContext.Provider value={{
         user,
         isAuthenticated,
         signUp,
-        signIn
+        signIn,
+        update
       }}>
         { children }
       </AuthContext.Provider>

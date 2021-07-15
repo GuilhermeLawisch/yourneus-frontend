@@ -2,7 +2,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 import Router from 'next/router';
 
 import api from '../services/axios';
-import { User } from "../../pages/user";
 import { AuthContext } from "./AuthContext";
 
 type IUser = {
@@ -38,6 +37,7 @@ type INewsContext = {
   createNews: (data: INewsCreateAndUpdate) => Promise<void>
   getNews: (id: string) => Promise<void>
   updateNews: (data: INewsCreateAndUpdate) => Promise<void>
+  deleteNews: (id: string) => Promise<void>
 }
 
 export const NewsContext = createContext({} as INewsContext)
@@ -81,6 +81,14 @@ const NewsContextProvider = ({ children }) => {
     }
   }
 
+  const deleteNews = async (id: string) => {
+    const response = await api.delete(`/news/${id}`) 
+
+    if (response.data.message == 'success') {
+      Router.push('/')
+    }
+  }
+
   return (
     <>
       <NewsContext.Provider value={{
@@ -90,7 +98,8 @@ const NewsContextProvider = ({ children }) => {
         getAllNews,
         createNews,
         getNews,
-        updateNews
+        updateNews,
+        deleteNews
       }}>
         { children }
       </NewsContext.Provider>

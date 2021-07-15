@@ -37,6 +37,9 @@ export const Container = styled.section`
       width: 100%;
       padding: 1rem;
 
+      word-wrap: break-word;
+      white-space: pre-line;
+
       background-color: var(--purple);
 
       font-family: 'Roboto';
