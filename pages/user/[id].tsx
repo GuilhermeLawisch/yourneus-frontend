@@ -38,10 +38,10 @@ export default function User() {
           <div>
             <form onSubmit={handleSubmit(handleUpdate)}>
               <h2>Update your informations here</h2>
+              <h3>{ user?.email }</h3>
               { !user ?? <img src={ user?.avatar_url } alt={`Image from ${ user?.username }`} /> }
               <input {...register('username')} type="text" name="username" id="username" placeholder="username" defaultValue={ user?.username } />
-              <input {...register('email')} type="text" name="email" id="email" placeholder="email" defaultValue={ user?.email } />
-              <input {...register('avatar_url')} type="text" name="avatar_url" id="avatar_url" placeholder="avatar_url" defaultValue={ user?.avatar_url } />
+              <input {...register('avatar_url')} type="text" name="avatar_url" id="avatar_url" placeholder="avatar url" defaultValue={ user?.avatar_url } />
               <input {...register('password')} type="password" name="password" id="password" placeholder="password" />
               <button type="submit">Update</button>
             </form>

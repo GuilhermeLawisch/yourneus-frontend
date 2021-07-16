@@ -34,8 +34,8 @@ export const Container = styled.section`
     top: 100px;
     
     .card {
-      width: 100%;
-      padding: 1rem;
+      width: min(42.5vw, 528px);
+      padding: 2rem;
 
       word-wrap: break-word;
       white-space: pre-line;
@@ -45,6 +45,10 @@ export const Container = styled.section`
       font-family: 'Roboto';
 
       cursor: pointer;
+
+      h3 {
+        font-size: 2rem;
+      }
     }
   }
 

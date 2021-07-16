@@ -11,6 +11,7 @@ export const Container = styled.main`
     h2,
     h3,
     p,
+    span,
     button,
     label,
     input,

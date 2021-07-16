@@ -16,6 +16,22 @@ export const Container = styled.header`
     height: 100%;
     margin: auto;
  
+    .left {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+
+      span {
+        color: hsl(295, 100%, 30%);
+      }
+    }
+
+    .left.dark {
+      span {
+        color: hsl(295, 50%, 90%) !important;
+      }
+    }
+
     div:first-child {
       font-family: 'Roboto', sans-serif;
       font-weight: 700;
@@ -30,7 +46,31 @@ export const Container = styled.header`
       font-family: 'Roboto', sans-serif;
       font-weight: 400;
       font-size: 1.2rem;
+
+      /* position: relative; */
     }
+
+    nav ul li {
+      position: relative;
+    } 
+
+    nav ul li a::after {
+      content: '';
+      background-color: var(--purple);
+      width: 0%;
+      height: 5px;
+      position: absolute;
+      top: min(6vh, 3.5rem);
+      left: 0;
+      right: 0;
+
+      transition: 0.15s;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
   }
   
 `

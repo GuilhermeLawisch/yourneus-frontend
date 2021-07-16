@@ -75,7 +75,8 @@ const AuthContextProvider = ({ children }) => {
     const response = await api.put(`/user/update/${id}`, { username, email, password, avatar_url })
 
     if (response.data.message == 'success') {
-      signIn({ email, password })
+      // signIn({ email, password })
+      Router.push('/')
     }
   }
 

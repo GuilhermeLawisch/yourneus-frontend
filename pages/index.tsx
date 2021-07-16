@@ -27,9 +27,9 @@ export default function Home() {
   const { getNews } = useContext(NewsContext)
   const { allNews, getAllNews } = useContext(NewsContext)
 
-  const highlighted1 = [-1, '']
-  const highlighted2 = [-1, '']
-  const highlighted3 = [-1, '']
+  const highlighted1 = [-2, '']
+  const highlighted2 = [-2, '']
+  const highlighted3 = [-2, '']
 
   allNews.forEach((value:any) => {
     if (value.likes > highlighted1[0]) { 
@@ -67,7 +67,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>YourneuS</title>
+        <title>YourneuS | Home</title>
       </Head>
 
       <Background>

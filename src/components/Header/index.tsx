@@ -4,29 +4,39 @@ import Router from 'next/router'
 import { Toggle } from '../Toggle'
 import { AuthContext } from '../../context/AuthContext'
 import { useContext } from 'react'
+import { ToggleContext } from '../../context/ToggleContext'
 
 const Header = () => {
+  const { theme } = useContext(ToggleContext)
   const { isAuthenticated, user } = useContext(AuthContext)
 
   return (
     <>
       <Container>
         <div>
-          <div>
-            <h1><a onClick={() => Router.push("/")}>YourneuS</a></h1>
+          <div className={cx( 
+            'left',
+            theme ? 'dark' : ''
+          )}>
+            <h1><a onClick={() => Router.push("/")}><span>Y</span>ourneu<span>S</span></a></h1>
+            <Toggle />
           </div>
           <div className={cx(
             'section'
           )}>
             <nav>
               <ul>
-                <li><a onClick={() => Router.push("/news/create")}>New News</a></li>
                 { isAuthenticated ? (
-                  <li><a onClick={() => Router.push("/user")}>{ user?.username }</a></li>
+                  <>
+                    <li><a onClick={() => Router.push("/news/create")}>Add News</a></li>
+                    <li><a onClick={() => Router.push(`/user/${user.id}`)}>{ user?.username }</a></li>
+                  </>
                 ) : (
-                  <li><a onClick={() => Router.push("/user/signin")}>Sign In</a></li>
+                  <>
+                    <li><a onClick={() => Router.push("/user/signin")}>Sign In</a></li>
+                    <li><a onClick={() => Router.push("/user/signup")}>Sign Up</a></li>
+                  </>
                 )}
-                <Toggle />
               </ul>
             </nav>
             <div>
