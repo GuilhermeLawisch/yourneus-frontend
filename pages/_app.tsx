@@ -1,4 +1,5 @@
 import type { AppProps } from 'next/app'
+import { Toaster } from 'react-hot-toast'
 import GlobalStyles from '../src/styles/global';
 import { ToggleContextProvider } from '../src/context/ToggleContext'
 import { AuthContextProvider } from '../src/context/AuthContext'
@@ -11,6 +12,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         <AuthContextProvider>
           <NewsContextProvider>
             <Component {...pageProps} />
+            <Toaster 
+              position="top-center"
+              reverseOrder={false}
+            />
             <GlobalStyles />
           </NewsContextProvider>
         </AuthContextProvider>

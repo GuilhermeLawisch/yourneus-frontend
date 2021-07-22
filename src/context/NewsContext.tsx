@@ -119,12 +119,16 @@ const NewsContextProvider = ({ children }) => {
   const getSearchNews = async (value: string) => {
     toggleVisible(false)
 
-    const response = await api.get(`/news/search/${value}`)
+    try {
+      const response = await api.get(`/news/search/${value}`)
 
-    setSearchNews(response.data)
+      setSearchNews(response.data)
 
-    Router.push(`/news/show/${value}`)
-    toggleVisible(true)
+      Router.push(`/news/show/${value}`)
+      toggleVisible(true)
+    } catch (err) {
+      alert(`error ${err}`)
+    }
   }
 
   const createNews = async (data: INewsCreateAndUpdate) => {

@@ -1,8 +1,10 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { setCookie, parseCookies } from 'nookies';
 import Router from 'next/router';
+import { toast } from 'react-hot-toast';
 
 import api from '../services/axios';
+import { ToggleContext } from './ToggleContext';
 
 type ISignUp = {
   username: string;
@@ -39,6 +41,8 @@ export const AuthContext = createContext({} as IAuthContext)
 const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState<IUser | null>(null)
 
+  const { toggleVisible } = useContext(ToggleContext)
+
   const isAuthenticated = !!user;
 
   useEffect(() => {
@@ -50,28 +54,35 @@ const AuthContextProvider = ({ children }) => {
   }, [])
 
   const signUp = async ({ username, email, password }) => {
-    const response = await api.post("/user/register", { username, email, password })
+    try {
+      const response = await api.post("/user/register", { username, email, password })
 
-    console.log(response.data.error)
-    console.log(response.data.message)
-
-    Router.push('/user/signin')
+      Router.push('/user/signin')
+    } catch (err) {
+      toggleVisible(true)
+      toast.error(`accont already exists with this username and email`)
+    }
   }
  
   const signIn = async ({ email, password }: ISignIn) => {
-    const response = await api.post("/user/auth", { email, password })
+    try {
+      const response = await api.post("/user/auth", { email, password })
 
-    if (response.data.error) {
-      alert(response.data.error)
+      if (response.data.error) {
+        alert(response.data.error)
+      }
+      
+      setCookie(undefined, 'yourneustoken', response.data.token, {
+        maxAge: 60 * 60 * 1   // 1 hour
+      })
+
+      setUser(response.data.user)
+
+      Router.push('/')
+    } catch (err) {
+      toggleVisible(true)
+      toast.error(`email or password invalid`);
     }
-    
-    setCookie(undefined, 'yourneustoken', response.data.token, {
-      maxAge: 60 * 60 * 1   // 1 hour
-    })
-
-    setUser(response.data.user)
-
-    Router.push('/')
   }
 
   const update = async ({ username, email, password, avatar_url }: IUser) => {
