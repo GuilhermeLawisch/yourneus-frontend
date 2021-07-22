@@ -71,12 +71,24 @@ export const Container = styled.header`
       transition: 0.15s;
     }
 
-    nav ul li a:hover::after {
+    nav ul li:hover a::after {
       width: 100%;
     }
 
-    li.search {
+    .avatar {
+      width: 48px;
+      height: 48px;
+      
+      border-radius: 50%;
+      margin-left: 1rem;
+    }
 
+    .avatar-github {
+      margin-left: 1rem;
+    }
+
+    li.search {
+      cursor: pointer;
       transition: 0.1s;
 
       input {
@@ -101,6 +113,10 @@ export const Container = styled.header`
       svg {
         cursor: pointer;
       }
+    }
+
+    li.userinfo:hover {
+      cursor: pointer;
     }
 
     li.on {
