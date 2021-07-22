@@ -1,5 +1,5 @@
 import Head from "next/head"
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import cx from 'classnames'
 
@@ -12,7 +12,7 @@ import { AuthContext } from "../../../src/context/AuthContext"
 import { Container } from "../../../src/styles/sign"
 
 type IData = {
-  name: string;
+  username: string;
   email: string;
   password: string;
 }
@@ -20,12 +20,16 @@ type IData = {
 export default function SignUp() {
   const { register, handleSubmit } = useForm()
 
-  const { theme } = useContext(ToggleContext)
+  const { theme, toggleVisible } = useContext(ToggleContext)
   const { signUp } = useContext(AuthContext)
 
   const handleSignIn = async (data: IData) => {
     await signUp(data)
   }
+
+  useEffect(() => {
+    toggleVisible(true)
+  }, [])
 
   return (
     <>
@@ -42,7 +46,7 @@ export default function SignUp() {
               <form onSubmit={handleSubmit(handleSignIn)} className={cx(
                 theme ? 'dark' : ''
               )}>
-                <input {...register('name')} type="text" name="name" id="name" placeholder="Name" />
+                <input {...register('username')} type="text" name="username" id="username" placeholder="Name" />
                 <input {...register('email')} type="text" name="email" id="email" placeholder="Email" />
                 <input {...register('password')} type="password" name="password" id="password" placeholder="Password" />
                 <button type="submit">Sign Up</button>

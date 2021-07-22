@@ -21,11 +21,11 @@ export const Container = styled.section`
     gap: 1.5rem;
 
     h2 {
-
+      font-size: 2.2rem;
     }
 
     p {
-
+      font-size: 1.6rem;
     }
 
     span {

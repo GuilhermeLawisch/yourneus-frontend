@@ -1,7 +1,6 @@
 import Head from "next/head"
-import { useContext } from "react"
-import { format, parseISO } from "date-fns"
-import ptBR from "date-fns/locale/pt-BR"
+import { useContext, useEffect, useState } from "react"
+import { useRouter } from 'next/router'
 
 import { Background } from "../../src/components/Background"
 import { Header } from "../../src/components/Header"
@@ -10,14 +9,22 @@ import { Container } from "../../src/styles/view"
 import { NewsContext } from "../../src/context/NewsContext"
 
 export default function News() {
-  const { news } = useContext(NewsContext)
+  const router = useRouter()
+  const id = router.query.id
 
-  const date = format(parseISO(String(news?.updatedAt)), 'H:mm d MMMM yyyy', { locale: ptBR })
+  const [date, setDate] = useState('')
+  const { news, getNews } = useContext(NewsContext)
+
+  useEffect(() => {
+    if (Object.keys(news).length == 0) {
+      getNews('refresh')
+    }
+  }, [])
 
   return (
     <>
       <Head>
-        <title>YourneuS | View News</title>
+        <title>YourneuS | View</title>
       </Head>
 
       <Background>
@@ -27,7 +34,7 @@ export default function News() {
             <h2>{ news?.title }</h2>
             <p>{ news?.category }</p>
             <p>{ news?.content }</p>
-            <span>{ `Atualizado: ${date}` }</span>
+            <span>{ `Atualizado: ${news?.dateNews}` }</span>
           </div>
         </Container>
       </Background>

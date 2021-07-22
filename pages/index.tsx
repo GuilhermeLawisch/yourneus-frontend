@@ -1,13 +1,14 @@
 import React, { useState, useContext, useEffect } from 'react'
 import Head from "next/head"
 import cx from 'classnames'
+import { format, parseISO } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
 
 import { Header } from '../src/components/Header'
 import { Background } from '../src/components/Background'
 import { Container } from '../src/styles/home'
 
 import { ToggleContext } from "../src/context/ToggleContext"
-import { AuthContext } from "../src/context/AuthContext"
 import { NewsContext } from "../src/context/NewsContext"
 
 type INews = {
@@ -16,49 +17,62 @@ type INews = {
   category: string;
   content: string;
   idCreator: string;
-  likes: number;
+  likes: Array<string>;
   createdAt: Date;
   updatedAt?: Date;
 }
 
 export default function Home() {
-  const { theme } = useContext(ToggleContext)
-  const { user } = useContext(AuthContext)
-  const { getNews } = useContext(NewsContext)
-  const { allNews, getAllNews } = useContext(NewsContext)
+  const [visible, setVisible] = useState(false)
 
-  const highlighted1 = [-2, '']
-  const highlighted2 = [-2, '']
-  const highlighted3 = [-2, '']
+  const { theme } = useContext(ToggleContext)
+  const { allNews, getNews, getAllNews } = useContext(NewsContext)
+
+  const highlighted1 = [0, '']
+  const highlighted2 = [0, '']
+  const highlighted3 = [0, '']
 
   allNews.forEach((value:any) => {
-    if (value.likes > highlighted1[0]) { 
-
+    if (value.likes.length > highlighted1[0]) { 
+      
       highlighted3[0] = highlighted2[0]
       highlighted3[1] = highlighted2[1]
 
       highlighted2[0] = highlighted1[0]
       highlighted2[1] = highlighted1[1]
 
-      highlighted1[0] = value.likes
+      highlighted1[0] = value.likes.length
       highlighted1[1] = value.id
 
-    } else if (value.likes > highlighted2[0]) {
+    } else if (value.likes.length > highlighted2[0]) {
 
       highlighted3[0] = highlighted2[0]
       highlighted3[1] = highlighted2[1]
 
-      highlighted2[0] = value.likes
+      highlighted2[0] = value.likes.length
       highlighted2[1] = value.id
 
-    } else if (value.likes > highlighted3[0]) {
+    } else if (value.likes.length > highlighted3[0]) {
 
-      highlighted3[0] = value.likes
+      highlighted3[0] = value.likes.length
       highlighted3[1] = value.id
+
     }
   })
 
   const highlightedNews = allNews.filter((value: INews) => value.id === highlighted1[1] || value.id === highlighted2[1] || value.id === highlighted3[1])
+
+  const commomNews = []
+  allNews.filter((value: INews) => {
+    if (value.id !== highlighted1[1] && value.id !== highlighted2[1] && value.id !== highlighted3[1]) {
+      const date = format(parseISO(String(value.createdAt)), 'H:mm d/MM', { locale: ptBR })
+
+      commomNews.push({ 
+        ...value,
+        date
+      })
+    }
+  })
 
   useEffect(() => {
     getAllNews()
@@ -84,7 +98,7 @@ export default function Home() {
                     value.id === highlighted3[1] ? `highlighted3` : ''
                   )}>
                     <h3>{ value.title }</h3>
-                    <p>{ value.description }</p>
+                    <p >{ value.category }</p>
                   </a>
                 </>
               )
@@ -92,20 +106,21 @@ export default function Home() {
           </div>
 
           <div className="cards">
-            {allNews.map((value:any, index:any) => {
+            {commomNews?.map((value:any, index:any) => {
               return (
                 <>
                   <a onClick={() => getNews(value.id)} key={index} className={cx(
                     'card',
                     theme ? 'dark' : 'white'
                   )}>
-                    <p>{ value.id }</p>
+                    {/* <p>{ value.id }</p> */}
                     <h3>{ value.title }</h3>
-                    <p>{ value.category }</p>
-                    <p>{ value.content }</p>
+                    <p className="category">{ value.category }</p>
+                    <p className="date">{ value.date }</p>
+                    {/* <p>{ value.content }</p>
                     <p>{ value.idCreator }</p>
                     <p>{ value.createdAt }</p>
-                    <p>{ value.updatedAt }</p>
+                    <p>{ value.updatedAt }</p> */} 
                   </a>
                 </>
               )

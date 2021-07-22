@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { parseCookies } from 'nookies';
 
-const { 'yourneustoken':  token } = parseCookies()
+const { 'yourneustoken': token } = parseCookies()
 
 const api = axios.create({
   baseURL: `http://${process.env.NEXT_PUBLIC_URL}`

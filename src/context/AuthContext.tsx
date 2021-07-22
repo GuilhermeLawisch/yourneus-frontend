@@ -5,7 +5,7 @@ import Router from 'next/router';
 import api from '../services/axios';
 
 type ISignUp = {
-  name: string;
+  username: string;
   email: string;
   password: string;
 }
@@ -49,17 +49,22 @@ const AuthContextProvider = ({ children }) => {
     }
   }, [])
 
-  const signUp = async ({ name, email, password }) => {
-    const response = await api.post("/register", { name, email, password })
+  const signUp = async ({ username, email, password }) => {
+    const response = await api.post("/user/register", { username, email, password })
 
-    console.log(response.data.userData)
+    console.log(response.data.error)
+    console.log(response.data.message)
 
-    setUser(response.data.userData)
+    Router.push('/user/signin')
   }
  
   const signIn = async ({ email, password }: ISignIn) => {
     const response = await api.post("/user/auth", { email, password })
 
+    if (response.data.error) {
+      alert(response.data.error)
+    }
+    
     setCookie(undefined, 'yourneustoken', response.data.token, {
       maxAge: 60 * 60 * 1   // 1 hour
     })

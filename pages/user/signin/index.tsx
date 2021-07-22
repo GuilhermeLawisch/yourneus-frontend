@@ -1,5 +1,5 @@
 import Head from "next/head"
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { useForm } from 'react-hook-form'
 import cx from "classnames"
 
@@ -18,12 +18,17 @@ type IData = {
 export default function SignIn() {
   const { register, handleSubmit } = useForm()
 
-  const { theme } = useContext(ToggleContext)
+  const { theme, toggleVisible } = useContext(ToggleContext)
   const { signIn } = useContext(AuthContext)
 
   const handleSignIn = async (data: IData) => {
+    toggleVisible(false)
     await signIn(data)
   }
+
+  useEffect(() => {
+    toggleVisible(true)
+  }, [])
 
   return (
     <>

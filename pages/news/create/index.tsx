@@ -21,7 +21,7 @@ type IData = {
 export default function RegisterNews() {
   const { isAuthenticated } = useContext(AuthContext)
   const { createNews } = useContext(NewsContext)
-  const { theme } = useContext(ToggleContext)
+  const { theme, toggleVisible } = useContext(ToggleContext)
 
   const { register, handleSubmit } = useForm()
 
@@ -31,6 +31,7 @@ export default function RegisterNews() {
 
   useEffect(() => {
     // { isAuthenticated ? <></> : Router.push('/signin') }
+    toggleVisible(true)
   }, [])
 
   return (

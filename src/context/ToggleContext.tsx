@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { ReactNode, createContext } from 'react';
 
 interface IToggleContext {
+  visible: boolean;
   theme: boolean;
+  toggleVisible: (visible: boolean) => void;
   toggleTheme: () => void;
 }
 
@@ -13,7 +15,12 @@ interface IProps {
 export const ToggleContext = createContext({} as IToggleContext);
 
 const ToggleContextProvider = (props: IProps) => {
+  const [visible, setVisible] = useState(false)
   const [theme, setTheme] = useState<boolean>(false)
+
+  const toggleVisible = (visible: boolean) => {
+    setVisible(visible)
+  } 
 
   const toggleTheme = () => {
     setTheme(!theme)
@@ -21,7 +28,9 @@ const ToggleContextProvider = (props: IProps) => {
 
   return (
     <ToggleContext.Provider value={{ 
+      visible,
       theme, 
+      toggleVisible,
       toggleTheme 
     }}>
       {props.children}

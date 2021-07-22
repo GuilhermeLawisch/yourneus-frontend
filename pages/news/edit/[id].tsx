@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import Head from "next/head"
 import cx from 'classnames'
 import { useForm } from "react-hook-form"
@@ -13,7 +13,7 @@ export default function NewsAdmin() {
   const { register, handleSubmit } = useForm()
 
   const { theme } = useContext(ToggleContext)
-  const { newsEdit, updateNews, deleteNews } = useContext(NewsContext)
+  const { newsEdit, getNews, updateNews, deleteNews } = useContext(NewsContext)
 
   const handleUpdate = (data: any) => {
     if (data.category == '0') {
@@ -22,6 +22,12 @@ export default function NewsAdmin() {
       updateNews(data)
     }
   }
+
+  useEffect(() => {
+    if (Object.keys(newsEdit).length == 0) {
+      getNews('refresh')
+    }
+  }, [])
 
   return (
     <>
@@ -36,7 +42,7 @@ export default function NewsAdmin() {
             <div className={cx(
               theme ? 'dark' : ''
             )}>
-              <h2>Update your news</h2>
+              <h2>Update your news { newsEdit?.title }</h2>
               <form onSubmit={handleSubmit(handleUpdate)}>
                 <input {...register('title')} type="text" name="title" id="title" placeholder="Title" defaultValue={ newsEdit?.title } />
                 <select {...register('category')} name="category" id="category">

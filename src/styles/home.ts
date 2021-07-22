@@ -5,7 +5,7 @@ export const Container = styled.section`
     background: var(--background-dark);
   }
 
-  max-width: 1080px;
+  max-width: 1280px;
   width: 90%;
   margin: auto;
 
@@ -34,20 +34,30 @@ export const Container = styled.section`
     top: 100px;
     
     .card {
-      width: min(42.5vw, 528px);
+      width: min(42.5vw, 628px);
       padding: 2rem;
+      position: relative;
 
       word-wrap: break-word;
       white-space: pre-line;
 
       background-color: var(--purple);
 
-      font-family: 'Roboto';
+      font-family: 'Poppins';//'Roboto';
 
       cursor: pointer;
 
       h3 {
-        font-size: 2rem;
+        font-size: 2.2rem;
+      }
+      
+      p {
+        text-transform: uppercase;
+
+        position: absolute;
+        right: 2rem;
+        bottom: 2rem;
+        font-size: 1.2rem;
       }
     }
   }
@@ -57,16 +67,40 @@ export const Container = styled.section`
     grid-template-columns: 1fr;
     gap: 2rem;
 
+    padding-bottom: 1rem;
+
     .card {
       width: 100%;
       height: 250px;
-      padding: 1rem;
+      padding: 2rem;
+      position: relative;
 
       background-color: var(--purple-pink);
       position: relative;
       
       font-family: 'Roboto';
       cursor: pointer;
+
+      h3 {
+        font-size: 1.8rem;
+      }
+
+      p.category {
+        position: absolute;
+        bottom: 2rem;
+        right: 2rem;
+        text-transform: uppercase;
+
+        font-size: 1.1rem;
+      }
+
+      p.date {
+        position: absolute;
+        bottom: 2rem;
+        left: 2rem;
+
+        font-size: 1.1rem;
+      }
     }
     
     .card::before {
@@ -83,6 +117,16 @@ export const Container = styled.section`
       background-color: var(--purple-pink);
     }
   }
-  
-  
+
+  .show {
+    height: 85vh;
+
+    .search {
+      margin-top: 5vh;
+
+      .card::before {
+        top: calc(250px + 1rem);
+      }
+    }
+  }
 `;

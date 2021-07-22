@@ -82,6 +82,7 @@ export const Container = styled.section`
 
       button:hover {
         background: rgba(0, 0, 0, 0.05);
+        cursor: pointer;
       }
     }
   }

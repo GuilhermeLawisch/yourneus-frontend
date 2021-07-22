@@ -94,5 +94,9 @@ export const Container = styled.section`
     button:hover {
       background: rgba(0, 0, 0, 0.1);
     }
+
+    option {
+      color: #000 !important;
+    }
   }
 `;

@@ -1,12 +1,15 @@
 import { useContext, useEffect } from "react";
 import Head from "next/head";
 import Router from "next/router";
+import cx from 'classnames';
 
 import { AuthContext } from "../../src/context/AuthContext";
 import { Background } from "../../src/components/Background";
 import { Header } from "../../src/components/Header";
 import { Container } from "../../src/styles/user";
 import { useForm } from "react-hook-form";
+import { ToggleContext } from "../../src/context/ToggleContext";
+import { NewsContext } from "../../src/context/NewsContext";
 
 type IUser = {
   id?: string;
@@ -18,6 +21,7 @@ type IUser = {
 }
 
 export default function User() {
+  const { theme, toggleVisible } = useContext(ToggleContext)
   const { user, update } = useContext(AuthContext)
 
   const { register, handleSubmit } = useForm()
@@ -25,6 +29,10 @@ export default function User() {
   const handleUpdate = (data: IUser) => {
     update(data)
   }
+
+  useEffect(() => {
+    toggleVisible(true)
+  }, [])
 
   return (
     <>
@@ -35,7 +43,9 @@ export default function User() {
       <Background>
         <Header />
         <Container>
-          <div>
+          <div className={cx(
+            theme ? 'dark' : ''
+          )}>
             <form onSubmit={handleSubmit(handleUpdate)}>
               <h2>Update your informations here</h2>
               <h3>{ user?.email }</h3>

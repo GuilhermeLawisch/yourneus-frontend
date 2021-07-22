@@ -1,18 +1,24 @@
 import { Container } from './style'
 import cx from 'classnames'
-import { useContext } from 'react'
+import { ReactNode, useContext } from 'react'
 import { ToggleContext } from "../../context/ToggleContext"
 
-const Background = ({ children }:any) => {
-  const { theme } = useContext(ToggleContext)
+type IBackground = {
+  children: ReactNode;
+}
+
+const Background = (props: IBackground) => {
+  const { visible, theme } = useContext(ToggleContext)
 
   return (
     <>
       <Container>
         <div className={cx(
+          visible ? 'visible' : 'no-visible',
           theme ? 'dark' : 'white'
         )}>
-          { children }
+          { visible ? <></> : <i /> }
+          { visible ? props.children : <></> }
         </div>
       </Container>
     </>
