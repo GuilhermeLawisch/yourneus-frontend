@@ -4,7 +4,7 @@ import { parseCookies } from 'nookies';
 const { 'yourneustoken': token } = parseCookies()
 
 const api = axios.create({
-  baseURL: `http://${process.env.NEXT_PUBLIC_URL}`
+  baseURL: process.env.NEXT_PUBLIC_URL
 });
 
 // api.defaults.headers.common['Authorization'] = token;
