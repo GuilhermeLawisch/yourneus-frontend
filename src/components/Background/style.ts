@@ -17,7 +17,7 @@ export const Container = styled.main`
 
     >i {
 
-      border: 16px solid #f3f3f3;
+      border: 16px solid rgba(0,0,0,0.1);
       border-radius: 50%;
       border-top: 16px solid var(--purple);
       width: 120px;

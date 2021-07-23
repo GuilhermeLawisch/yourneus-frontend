@@ -6,7 +6,7 @@ export const Container = styled.header`
 
   border-bottom: 1px hsl(0, 0%, 75%) solid;
 
-  >div {
+  div.header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -26,10 +26,29 @@ export const Container = styled.header`
       }
     }
 
-    .left.dark {
+    .center {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 0);
+      
+      font-family: 'Roboto', sans-serif;
+      font-weight: 700;
+
+      span {
+        color: hsl(295, 100%, 22%);
+      }
+    }
+
+    .center.dark {
       span {
         color: hsl(295, 50%, 92%) !important;
       }
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
     }
 
     div:first-child {
@@ -41,7 +60,7 @@ export const Container = styled.header`
       list-style: none;
 
       display: flex;
-      gap: 3rem;
+      gap: 2.5vw;
 
       font-family: 'Poppins', sans-serif;
       font-weight: 400;
@@ -52,6 +71,8 @@ export const Container = styled.header`
     }
 
     nav ul li {
+      list-style: none;
+
       position: relative;
 
       display: flex;
@@ -62,9 +83,9 @@ export const Container = styled.header`
       content: '';
       background-color: var(--purple);
       width: 0%;
-      height: 4px;
+      height: 2px;
       position: absolute;
-      top: max(7.8vh, 3.7rem);
+      top: max(7vh, 2.7rem);
       left: 0;
       right: 0;
 
@@ -80,16 +101,21 @@ export const Container = styled.header`
       height: 48px;
       
       border-radius: 50%;
-      margin-left: 1rem;
+      margin-right: 1rem;
     }
 
     .avatar-github {
-      margin-left: 1rem;
+      margin-right: 1rem;
     }
 
     li.search {
+      list-style: none;
+
       cursor: pointer;
       transition: 0.1s;
+
+      display: flex;
+      align-items: center;
 
       input {
         border: 0;
@@ -97,7 +123,7 @@ export const Container = styled.header`
         margin: 1rem 1rem 1rem 0;
         border-bottom: 1px solid hsl(0, 0%, 75%);
         background: transparent;
-        width: 250px;
+        width: 200px;
         
         font-family: 'Poppins', sans-serif;
         font-weight: 400;
@@ -126,12 +152,114 @@ export const Container = styled.header`
     }
   }
   
-  @media (max-width: 425px) {
+  @media (max-width: 500px) {
     >div {
       display: grid;
       grid-template-columns: 3fr;
-      
     }
 
+    .left nav {
+      display: none;
+    }
+  
+    .one,
+    .two,
+    .three {
+      height: 5px;
+      width: 100%;
+      margin: 6px auto;
+
+      transition-duration: 0.3s;
+    }
+
+    .left.light-left {
+      .one,
+      .two,
+      .three {
+        background-color: var(--title-dark-theme);
+      }
+    }
+
+    .left.dark-left {
+      .one,
+      .two,
+      .three {
+        background-color: var(--title-light-theme);
+      }
+    }
+  
+    .menu-toggle {
+      width: 40px;
+      height: 40px;
+      margin-right: 20px;
+    }
+  
+    .left.on {
+      position: absolute;
+      top:0;
+      left:0;
+      
+      width: 100vw;
+      height: 100vh;
+      
+      z-index: 10;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .on.light-left {
+      background-color: var(--background-dark);
+    }
+
+    .on.dark-left {
+      background-color: var(--background-white);
+    }
+    
+    .left.on nav {
+      display: block;
+    }
+  
+    .left.on .menu-toggle {
+      position: absolute;
+      right: 22px;
+      top: 15px;
+    }
+  
+    .left.on .menu-toggle .one {
+      transform: rotate(45deg) translate(7px, 7px);
+    }
+  
+    .left.on .menu-toggle .two {
+      opacity: 0;
+    }
+  
+    .left.on .menu-toggle .three {
+      transform: rotate(-45deg) translate(8px, -9px);
+    }
+  
+    .left.on nav ul {
+      text-align: center;
+      display: block;
+    }
+  
+    .left.on nav ul li a{
+      transition-duration: 0.5s;
+      font-size: 2rem;
+      line-height: .6rem;
+      display: block;
+      padding: 2.2rem;
+    }
+
+    .left.on {
+      .avatar {
+        margin-right: 0;
+      }
+
+      .avatar-github {
+        margin-right: 0;
+      }
+    }
   }
 `

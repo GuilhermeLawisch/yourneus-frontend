@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import Router from 'next/router';
 import { setCookie, parseCookies } from 'nookies';
+import { toast } from 'react-hot-toast'
 import { format, parseISO } from "date-fns"
 import ptBR from "date-fns/locale/pt-BR"
 
@@ -61,14 +62,23 @@ const NewsContextProvider = ({ children }) => {
   const getAllNews = async () => {
     toggleVisible(false)
 
+    try {
+
     const response = await api.get('/news')
 
     setAllNews(response.data)
     toggleVisible(true)
+
+  } catch (err) {
+    toggleVisible(true)
+    toast.error(`${err}`);
+  }
   }
 
   const getNews = async (id: string | string[]) => {
     toggleVisible(false)
+
+    try {
 
     const { 'yourneusidnews': idnews } = parseCookies()
 
@@ -114,6 +124,11 @@ const NewsContextProvider = ({ children }) => {
     }
     
     toggleVisible(true)
+
+  } catch (err) {
+    toggleVisible(true)
+    toast.error(`${err}`);
+  }
   }
 
   const getSearchNews = async (value: string) => {
@@ -127,29 +142,47 @@ const NewsContextProvider = ({ children }) => {
       Router.push(`/news/show/${value}`)
       toggleVisible(true)
     } catch (err) {
-      alert(`error ${err}`)
+      toggleVisible(true)
+      toast.error(`${err}`);
     }
   }
 
   const createNews = async (data: INewsCreateAndUpdate) => {
-    await api.post('/news/create', data)
+    try {
+      await api.post('/news/create', data)
 
-    Router.push('/')
+      Router.push('/')
+    } catch (err) {
+      toggleVisible(true)
+      toast.error(`${err}`);
+    }
   }
 
   const updateNews = async (data: INewsCreateAndUpdate) => {
+    try {
+
     const response = await api.put(`/news/${newsEdit.id}`, data)
 
     if (response.data.message == 'success') {
       Router.push('/')
     }
+    } catch (err) {
+      toggleVisible(true)
+      toast.error(`${err}`);
+    }
   }
 
   const deleteNews = async (id: string) => {
+    try {
     const response = await api.delete(`/news/${id}`) 
 
     if (response.data.message == 'success') {
       Router.push('/')
+    }
+
+    } catch (err) {
+      toggleVisible(true)
+      toast.error(`${err}`);
     }
   }
 

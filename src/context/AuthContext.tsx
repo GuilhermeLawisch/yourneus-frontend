@@ -86,6 +86,7 @@ const AuthContextProvider = ({ children }) => {
   }
 
   const update = async ({ username, email, password, avatar_url }: IUser) => {
+    try {
     const id = user.id
 
     const response = await api.put(`/user/update/${id}`, { username, email, password, avatar_url })
@@ -93,6 +94,10 @@ const AuthContextProvider = ({ children }) => {
     if (response.data.message == 'success') {
       // signIn({ email, password })
       Router.push('/')
+    }
+    } catch (err) {
+      toggleVisible(true)
+      toast.error(`${err}`);
     }
   }
 

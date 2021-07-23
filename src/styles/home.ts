@@ -129,4 +129,21 @@ export const Container = styled.section`
       }
     }
   }
+
+  @media (max-width: 500px) {
+    .cardsHighlighted {
+      grid-template-areas: 
+        'highlighted1'
+        'highlighted2' 
+        'highlighted3';
+      top: 2rem;
+      margin-bottom: 6rem;
+
+      .card {
+        width: 100%;
+        height: 250px;
+        padding: 2rem;
+      }
+    }
+  }
 `;
