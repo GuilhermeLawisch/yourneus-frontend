@@ -9,8 +9,16 @@ const api = axios.create({
 
 // api.defaults.headers.common['Authorization'] = token;
 
-if (token) {
-  api.defaults.headers['Authorization'] = `Bearer ${token}`;
-}
+// Add a request interceptor
+api.interceptors.request.use(function (config) {
+  if (token) {
+    api.defaults.headers['Authorization'] = `Bearer ${token}`;
+  }
+  // Do something before request is sent
+  return config;
+}, function (error) {
+  // Do something with request error
+  return Promise.reject(error);
+});
 
 export default api;

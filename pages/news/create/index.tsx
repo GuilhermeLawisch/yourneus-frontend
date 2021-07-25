@@ -52,10 +52,12 @@ export default function RegisterNews() {
                 <input {...register('title')} type="text" name="title" id="title" placeholder="Title" />
                 <select {...register('category')} name="category" id="category">
                   <option value="">Select Category</option>
-                  <option value="Information">Information</option>
                   <option value="Culture">Culture</option>
-                  <option value="Sport">Sport</option>
+                  <option value="Economy">Economy</option>
+                  <option value="Education">Education</option>
                   <option value="Famous">Famous</option>
+                  <option value="Information">Information</option>
+                  <option value="Sport">Sport</option>
                 </select>
                 <textarea {...register('content')} name="content" id="content" placeholder="Content" />
                 <button type="submit">Register new news</button>

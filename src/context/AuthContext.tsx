@@ -49,7 +49,8 @@ const AuthContextProvider = ({ children }) => {
     const { 'yourneustoken': token } = parseCookies()
 
     if (token) {
-      api.post("/user/data", { token }).then(response => setUser(response.data))
+      api.defaults.headers['Authorization'] = `Bearer ${token}`;
+      api.post("/user/data", {}).then(response => setUser(response.data))
     }
   }, [])
 
@@ -73,7 +74,8 @@ const AuthContextProvider = ({ children }) => {
       }
       
       setCookie(undefined, 'yourneustoken', response.data.token, {
-        maxAge: 60 * 60 * 1   // 1 hour
+        maxAge: 60 * 60 * 1,   // 1 hour
+        path: '/'
       })
 
       setUser(response.data.user)

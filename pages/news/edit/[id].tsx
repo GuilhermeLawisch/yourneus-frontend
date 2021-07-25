@@ -47,10 +47,12 @@ export default function NewsAdmin() {
                 <input {...register('title')} type="text" name="title" id="title" placeholder="Title" defaultValue={ newsEdit?.title } />
                 <select {...register('category')} name="category" id="category">
                   <option value="0">Select Category</option>
+                  <option value="Culture">Culture</option>
+                  <option value="Economy">Economy</option>
+                  <option value="Education">Education</option>
+                  <option value="Famous">Famous</option>
                   <option value="Information">Information</option>
                   <option value="Sport">Sport</option>
-                  <option value="Famous">Famous</option>
-                  <option value="Culture">Culture</option>
                 </select>
                 <textarea {...register('content')} name="content" id="content" placeholder="Content"  defaultValue={ newsEdit?.content } />
                 <div>
