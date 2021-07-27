@@ -64,7 +64,7 @@ export const Container = styled.header`
 
       font-family: 'Poppins', sans-serif;
       font-weight: 400;
-      font-size: 1.25rem;
+      font-size: 1rem;
       text-transform: uppercase;
 
       /* position: relative; */
@@ -97,8 +97,8 @@ export const Container = styled.header`
     }
 
     .avatar {
-      width: 48px;
-      height: 48px;
+      width: 42px;
+      height: 42px;
       
       border-radius: 50%;
       margin-right: 1rem;
@@ -123,7 +123,7 @@ export const Container = styled.header`
         margin: 1rem 1rem 1rem 0;
         border-bottom: 1px solid hsl(0, 0%, 75%);
         background: transparent;
-        width: 200px;
+        width: 250px;
         
         font-family: 'Poppins', sans-serif;
         font-weight: 400;
@@ -148,6 +148,14 @@ export const Container = styled.header`
     li.on {
       input[type="text"] {
         width: 0;
+      }
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    div.header {
+      nav ul {
+        font-size: 1.25rem !important;
       }
     }
   }
@@ -240,16 +248,24 @@ export const Container = styled.header`
     }
   
     .left.on nav ul {
-      text-align: center;
-      display: block;
+      
+      display: grid;
+      grid-template-columns: 1fr;
+      margin: auto;
     }
   
     .left.on nav ul li a{
       transition-duration: 0.5s;
-      font-size: 2rem;
-      line-height: .6rem;
+      font-size: 1.2rem;
+      line-height: 2rem;
       display: block;
       padding: 2.2rem;
+
+      margin: auto;
+    }
+
+    .left.on nav ul li a::after {
+      top: 4rem;
     }
 
     .left.on {

@@ -28,10 +28,10 @@ export const Container = styled.section`
     'highlighted1 highlighted2'
     'highlighted1 highlighted3';
     gap: 1.5rem;
-    margin: auto auto 200px auto;
+    margin: auto auto 100px auto;
 
     position: relative;
-    top: 100px;
+    top: 50px;
     
     .card {
       width: min(42.5vw, 628px);
@@ -142,7 +142,41 @@ export const Container = styled.section`
       .card {
         width: 100%;
         height: 250px;
-        padding: 2rem;
+        padding: 1rem;
+
+        h3 {
+          font-size: 1.8rem;
+        }
+        
+        p {
+          right: 1rem;
+          bottom: 1rem;
+          font-size: 1rem;
+        }
+      }
+    }
+
+    .cards {
+      .card {
+        padding: 1rem;
+
+          h3 {
+            font-size: 1.6rem;
+          }
+
+          p.category {
+            bottom: 1rem;
+            right: 1rem;
+
+            font-size: 1rem;
+          }
+
+          p.date {
+            bottom: 1rem;
+            left: 1rem;
+
+            font-size: 1rem;
+          }
       }
     }
   }
