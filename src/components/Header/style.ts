@@ -85,7 +85,7 @@ export const Container = styled.header`
       width: 0%;
       height: 2px;
       position: absolute;
-      top: max(7vh, 2.7rem);
+      top: max(6vh, 2.7rem);
       left: 0;
       right: 0;
 

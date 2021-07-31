@@ -16,13 +16,12 @@ const Header = () => {
   const [show, setShow] = useState<boolean>(true);
   const [searchOn, setSearchOn] = useState<boolean>(true)
   const [searchValue, setSearchValue] = useState<string>('')
-  const [isDesktop, setDesktop] = useState(window.innerWidth > 1000);
+  const [isDesktop, setDesktop] = useState(window.innerWidth > 500);
 
   const updateMedia = () => {
     setDesktop(window.innerWidth > 500);
   };
 
-  
   const HandleSearch = () => {
     if (!searchOn) {
       if (searchValue != '') {
