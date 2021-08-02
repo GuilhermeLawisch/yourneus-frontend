@@ -81,6 +81,10 @@ const NewsContextProvider = ({ children }) => {
     try {
 
     const { 'yourneusidnews': idnews } = parseCookies()
+    
+    const { 'yourneustoken': token } = parseCookies()
+
+    api.defaults.headers['Authorization'] = `Bearer ${token}`;
 
     let response
 
@@ -149,6 +153,10 @@ const NewsContextProvider = ({ children }) => {
 
   const createNews = async (data: INewsCreateAndUpdate) => {
     try {
+      const { 'yourneustoken': token } = parseCookies()
+
+      api.defaults.headers['Authorization'] = `Bearer ${token}`;
+
       await api.post('/news/create', data)
 
       Router.push('/')
@@ -160,6 +168,9 @@ const NewsContextProvider = ({ children }) => {
 
   const updateNews = async (data: INewsCreateAndUpdate) => {
     try {
+      const { 'yourneustoken': token } = parseCookies()
+
+      api.defaults.headers['Authorization'] = `Bearer ${token}`;
 
     const response = await api.put(`/news/${newsEdit.id}`, data)
 
@@ -174,6 +185,10 @@ const NewsContextProvider = ({ children }) => {
 
   const deleteNews = async (id: string) => {
     try {
+      const { 'yourneustoken': token } = parseCookies()
+
+      api.defaults.headers['Authorization'] = `Bearer ${token}`;
+
     const response = await api.delete(`/news/${id}`) 
 
     if (response.data.message == 'success') {

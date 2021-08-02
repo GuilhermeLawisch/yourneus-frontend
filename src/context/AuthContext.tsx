@@ -40,6 +40,7 @@ export const AuthContext = createContext({} as IAuthContext)
 
 const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState<IUser | null>(null)
+  const [token, setToken] = useState('')
 
   const { toggleVisible } = useContext(ToggleContext)
 
@@ -47,6 +48,9 @@ const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const { 'yourneustoken': token } = parseCookies()
+
+    console.log('teste 1')
+    console.log(token)
 
     if (token) {
       api.defaults.headers['Authorization'] = `Bearer ${token}`;
@@ -90,6 +94,10 @@ const AuthContextProvider = ({ children }) => {
   const update = async ({ username, email, password, avatar_url }: IUser) => {
     try {
       const id = user.id
+
+      const { 'yourneustoken': token } = parseCookies()
+
+      api.defaults.headers['Authorization'] = `Bearer ${token}`;
 
       const response = await api.put(`/user/update/${id}`, { username, email, password, avatar_url })
 
